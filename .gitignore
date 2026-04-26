@@ -1,0 +1,19 @@
+# Node
+node_modules/
+dist/
+
+# Python
+__pycache__/
+*.pyc
+.env
+venv/
+qvms/
+
+# Database
+*.db
+
+# QR codes (optional)
+backend/qr_codes/
+
+# VS Code
+.vscode/
