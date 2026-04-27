@@ -4,6 +4,7 @@ sqlalchemy==2.0.35
 psycopg[binary]
 python-dotenv==1.0.1
 passlib[bcrypt]==1.7.4
+bcrypt==3.2.2
 python-jose==3.3.0
 qrcode[pil]==7.4.2
 pillow==10.4.0
