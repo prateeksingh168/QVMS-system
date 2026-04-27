@@ -13,12 +13,12 @@ export default function RegisterVisitor() {
 
   const handleSubmit = async () => {
     try {
+      // 🔥 STEP 1: Visitor create
       const visitorRes = await API.post("/visitor/register", form);
 
       const visitorId = visitorRes.data.id;
 
-      console.log("Visitor ID:", visitorId);
-
+      // 🔥 STEP 2: Visit create → QR yaha milega
       const visitRes = await API.post("/visit/create", {
         visitor_id: visitorId,
         branch: "Indore",
@@ -26,11 +26,10 @@ export default function RegisterVisitor() {
 
       console.log("Visit Response:", visitRes.data);
 
-      let path = visitRes.data.qr_path;
+      // 🔥 FINAL QR FIX (BASE64)
+      const base64 = visitRes.data.qr_base64;
 
-      path = path.replace(/\\/g, "/");
-
-      const qrUrl = `https://imaginative-emotion-production-0b9d.up.railway.app/${path}`;
+      const qrUrl = `data:image/png;base64,${base64}`;
 
       setQr(qrUrl);
 
@@ -46,37 +45,37 @@ export default function RegisterVisitor() {
       <h2 className="text-xl font-bold mb-4">Register Visitor</h2>
 
       <input
-        className="input"
+        className="border p-2 mb-2 w-full"
         placeholder="Name"
         onChange={(e) => setForm({ ...form, name: e.target.value })}
       />
 
       <input
-        className="input"
+        className="border p-2 mb-2 w-full"
         placeholder="Contact"
         onChange={(e) => setForm({ ...form, contact: e.target.value })}
       />
 
       <input
-        className="input"
+        className="border p-2 mb-2 w-full"
         placeholder="Purpose"
         onChange={(e) => setForm({ ...form, purpose: e.target.value })}
       />
 
       <input
-        className="input"
+        className="border p-2 mb-2 w-full"
         placeholder="Organization"
         onChange={(e) => setForm({ ...form, organization: e.target.value })}
       />
 
       <button
         onClick={handleSubmit}
-        className="bg-blue-500 text-white w-full p-2 rounded mt-2"
+        className="bg-blue-500 text-white w-full p-2 rounded"
       >
         Submit
       </button>
 
-      {/* 🔥 QR SHOW HERE (same page) */}
+      {/* 🔥 QR SHOW */}
       {qr && (
         <div className="mt-6 text-center">
           <h3 className="mb-2 font-semibold">QR Code</h3>
