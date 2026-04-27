@@ -1,6 +1,9 @@
 from fastapi import FastAPI
 from app.core.database import Base, engine
-from app.routes import visitor, visit, dashboard, auth
+from app.routes.visitor import router as visitor_router
+from app.routes.visit import router as visit_router
+from app.routes.dashboard import router as dashboard_router
+from app.routes.auth import router as auth_router
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import os
@@ -24,10 +27,10 @@ os.makedirs(QR_PATH, exist_ok=True)
 
 app.mount("/qr_codes", StaticFiles(directory=QR_PATH), name="qr")
 
-app.include_router(auth.router)
-app.include_router(visitor.router)
-app.include_router(visit.router)
-app.include_router(dashboard.router)
+app.include_router(auth_router)
+app.include_router(visitor_router)
+app.include_router(visit_router)
+app.include_router(dashboard_router)
 app.mount("/qr_codes", StaticFiles(directory="qr_codes"), name="qr")
 
 @app.get("/")
