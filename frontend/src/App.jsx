@@ -5,7 +5,8 @@ import Dashboard from "./pages/Dashboard";
 import RegisterVisitor from "./pages/RegisterVisitor";
 import Scanner from "./pages/Scanner";
 
-// 🔐 Protected Route
+import Layout from "./components/Layout";
+
 const PrivateRoute = ({ children }) => {
   const token = localStorage.getItem("token");
   return token ? children : <Navigate to="/" />;
@@ -15,14 +16,19 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+
+        {/* Public */}
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
+        {/* Protected */}
         <Route
           path="/dashboard"
           element={
             <PrivateRoute>
-              <Dashboard />
+              <Layout>
+                <Dashboard />
+              </Layout>
             </PrivateRoute>
           }
         />
@@ -31,7 +37,9 @@ function App() {
           path="/visitor"
           element={
             <PrivateRoute>
-              <RegisterVisitor />
+              <Layout>
+                <RegisterVisitor />
+              </Layout>
             </PrivateRoute>
           }
         />
@@ -40,10 +48,13 @@ function App() {
           path="/scanner"
           element={
             <PrivateRoute>
-              <Scanner />
+              <Layout>
+                <Scanner />
+              </Layout>
             </PrivateRoute>
           }
         />
+
       </Routes>
     </BrowserRouter>
   );

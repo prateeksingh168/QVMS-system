@@ -20,8 +20,8 @@ export default function Dashboard() {
         const res = await API.get("/dashboard/");
 
         setStats(res.data);
-        setChartData(res.data.chart);   // ✅ REAL DATA
-        setRecent(res.data.recent);     // ✅ REAL DATA
+        setChartData(res.data.chart);
+        setRecent(res.data.recent);
 
       } catch (err) {
         console.error(err);
@@ -37,14 +37,12 @@ export default function Dashboard() {
     <div>
       <h2 className="text-2xl font-bold mb-6">Dashboard</h2>
 
-      {/* 🔥 KPI */}
       <div className="grid grid-cols-3 gap-4 mb-6">
         <Card title="Total Visits" value={stats.total_visits} />
         <Card title="Active Visits" value={stats.active_visits} />
         <Card title="Today Visits" value={stats.today_visits} />
       </div>
 
-      {/* 📊 REAL CHART */}
       <div className="bg-white p-6 rounded-xl shadow mb-6">
         <h3 className="mb-4 font-semibold">Last 7 Days</h3>
 

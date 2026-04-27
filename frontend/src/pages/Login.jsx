@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import API from "../services/api";
 
 export default function Login() {
@@ -15,15 +15,12 @@ export default function Login() {
         password,
       });
 
-      // 🔐 store token
       localStorage.setItem("token", res.data.access_token);
-
-      alert("Login successful");
-
       navigate("/dashboard");
+
     } catch (err) {
-      console.error(err);
       alert("Login failed");
+      console.log(err);
     }
   };
 
@@ -50,6 +47,16 @@ export default function Login() {
       >
         Login
       </button>
+
+      {/* 🔥 Signup link */}
+      <div className="mt-4">
+        <p>
+          Don't have an account?{" "}
+          <Link to="/signup" className="text-blue-500 underline">
+            Signup
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }
