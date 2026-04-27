@@ -10,21 +10,28 @@ export default function Scanner() {
     );
 
     scanner.render(
-      (decodedText) => {
+      async (decodedText) => {
         console.log("RAW QR:", decodedText);
 
         try {
           const data = JSON.parse(decodedText);
-
           const visitId = data.visit_id;
 
-          alert("Visit ID: " + visitId);
+          const res = await fetch(
+            "https://imaginative-emotion-production-0b9d.up.railway.app/visit/scan",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ visit_id: visitId }),
+            }
+          );
 
-          // 👉 future: API call yaha karega
+          const result = await res.json();
+
+          alert(`Status: ${result.status}`);
 
         } catch (err) {
-          alert("Invalid QR format");
-          console.log(err);
+          alert("Invalid QR");
         }
       },
       (error) => {

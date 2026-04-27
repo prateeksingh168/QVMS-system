@@ -49,7 +49,8 @@ export default function RegisterVisitor() {
       <input className="border p-2 mb-2 w-full" placeholder="Organization"
         onChange={(e) => setForm({ ...form, organization: e.target.value })} />
 
-      <button onClick={handleSubmit}
+      <button
+        onClick={handleSubmit}
         className="bg-blue-500 text-white w-full p-2 rounded">
         Submit
       </button>
