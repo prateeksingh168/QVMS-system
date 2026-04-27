@@ -1,6 +1,9 @@
 from sqlalchemy import Column, Integer, ForeignKey, DateTime, String
 from datetime import datetime
 from app.core.database import Base
+from sqlalchemy import Column, Integer, String
+
+
 
 class Visit(Base):
     __tablename__ = "visits"
@@ -10,3 +13,4 @@ class Visit(Base):
     branch = Column(String)
     check_in = Column(DateTime, default=datetime.utcnow)
     check_out = Column(DateTime, nullable=True)
+    status = Column(String, default="active")
