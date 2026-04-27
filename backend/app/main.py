@@ -4,7 +4,7 @@ from app.routes import visitor, visit, dashboard, auth
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 import os
-
+from app.models import user, visitor, visit, qr
 
 Base.metadata.create_all(bind=engine)
 
