@@ -1,10 +1,9 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://127.0.0.1:8000",
+  baseURL: "https://imaginative-emotion-production-0b9d.up.railway.app"
 });
 
-// Attach token automatically (future-proof)
 API.interceptors.request.use((req) => {
   const token = localStorage.getItem("token");
   if (token) {

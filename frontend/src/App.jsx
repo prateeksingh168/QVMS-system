@@ -1,43 +1,47 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import RegisterVisitor from "./pages/RegisterVisitor";
 import Scanner from "./pages/Scanner";
-import Layout from "./components/Layout";
+
+// 🔐 Protected Route
+const PrivateRoute = ({ children }) => {
+  const token = localStorage.getItem("token");
+  return token ? children : <Navigate to="/" />;
+};
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* 🔓 Public Routes */}
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
 
-        {/* 🔒 Protected Routes with Layout */}
         <Route
           path="/dashboard"
           element={
-            <Layout>
+            <PrivateRoute>
               <Dashboard />
-            </Layout>
+            </PrivateRoute>
           }
         />
+
         <Route
           path="/visitor"
           element={
-            <Layout>
+            <PrivateRoute>
               <RegisterVisitor />
-            </Layout>
+            </PrivateRoute>
           }
         />
+
         <Route
           path="/scanner"
           element={
-            <Layout>
+            <PrivateRoute>
               <Scanner />
-            </Layout>
+            </PrivateRoute>
           }
         />
       </Routes>

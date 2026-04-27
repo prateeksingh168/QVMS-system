@@ -6,6 +6,7 @@ export default function Navbar() {
   const logout = () => {
     localStorage.removeItem("token");
     navigate("/");
+    window.location.href = "/";
   };
 
   return (
