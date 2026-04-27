@@ -104,7 +104,7 @@ npm run dev
 ```
 
 <<<<<<< HEAD
-Pranav Soni
+Prateek Singh
 =======
 ---
 
