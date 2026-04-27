@@ -1,32 +1,46 @@
-import { Scanner } from "@yudiel/react-qr-scanner";
-import API from "../services/api";
+import { useEffect } from "react";
+import { Html5QrcodeScanner } from "html5-qrcode";
 
-export default function QRScanner() {
-  const handleScan = async (result) => {
-    if (result?.[0]?.rawValue) {
-      const id = result[0].rawValue.split("_")[1];
+export default function Scanner() {
 
-      try {
-        const res = await API.post(`/visit/scan/${id}`);
-        alert(`✅ ${res.data.message}`);
-      } catch (err) {
-        console.error(err);
-        alert("❌ Scan failed");
+  useEffect(() => {
+    const scanner = new Html5QrcodeScanner(
+      "reader",
+      { fps: 10, qrbox: 250 }
+    );
+
+    scanner.render(
+      (decodedText) => {
+        console.log("RAW QR:", decodedText);
+
+        try {
+          const data = JSON.parse(decodedText);
+
+          const visitId = data.visit_id;
+
+          alert("Visit ID: " + visitId);
+
+          // 👉 future: API call yaha karega
+
+        } catch (err) {
+          alert("Invalid QR format");
+          console.log(err);
+        }
+      },
+      (error) => {
+        console.warn(error);
       }
-    }
-  };
+    );
+
+    return () => {
+      scanner.clear();
+    };
+  }, []);
 
   return (
-    <div className="max-w-md mx-auto bg-white p-4 rounded-xl shadow text-center">
-      <h2 className="text-xl font-bold mb-4">Scan QR</h2>
-
-      <Scanner
-        onScan={handleScan}
-        onError={(err) => {
-          console.error(err);
-          alert("Camera permission denied ❌");
-        }}
-      />
+    <div className="p-4">
+      <h2 className="text-xl mb-4">Scan QR</h2>
+      <div id="reader"></div>
     </div>
   );
 }
