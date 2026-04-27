@@ -164,7 +164,7 @@ npm run build
 
 ## 👨‍💻 Author
 
-**Pranav**
+**Prateek**
 B.Tech AI & DS Student
 
 ---
