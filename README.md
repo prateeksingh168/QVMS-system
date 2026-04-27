@@ -137,7 +137,7 @@ npm run build
 
 ## 🔗 Live Demo
 
-* Frontend: https://your-netlify-link.netlify.app
+* Frontend: https://whimsical-stroopwafel-d9fe0a.netlify.app/
 * Backend API: https://your-railway-link
 
 ---
