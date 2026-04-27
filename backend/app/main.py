@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-
+from database import engine
+from models import Base
 from app.core.database import Base, engine
 from app.routes.visitor import router as visitor_router
 from app.routes.visit import router as visit_router

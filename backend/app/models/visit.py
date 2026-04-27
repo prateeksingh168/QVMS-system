@@ -3,8 +3,6 @@ from datetime import datetime
 from app.core.database import Base
 from sqlalchemy import Column, Integer, String
 
-
-
 class Visit(Base):
     __tablename__ = "visits"
 
