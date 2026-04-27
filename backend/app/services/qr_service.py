@@ -1,7 +1,9 @@
 import os
 import qrcode
 
-QR_DIR = "qr_codes"
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+QR_DIR = os.path.join(BASE_DIR, "qr_codes")
+
 os.makedirs(QR_DIR, exist_ok=True)
 
 def generate_qr(data: str):
