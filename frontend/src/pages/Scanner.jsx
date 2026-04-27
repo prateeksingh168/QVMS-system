@@ -32,6 +32,7 @@ export default function Scanner() {
 
         } catch (err) {
           alert("Invalid QR");
+          console.log(err);
         }
       },
       (error) => {
